@@ -4,43 +4,17 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>VEX AI Training</title>
-        <meta name="description" content="">
-        <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700">
+        <link rel="stylesheet" href="styles.css">
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
         <script src="training/convnet.js"></script>
         <script src="training/util.js"></script>
         <script src="training/vis.js"></script>
         <script src="training/deepqlearn.js"></script>
         <script src="training/game.js"></script>
 
-        <style>
-            #wrap {
-                width: 800px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            h2 {
-                text-align: center;
-            }
-
-            h1 {
-                font-size: 16px;
-                border-bottom: 1px #999 solid;
-                text-align: center;
-            }
-            body {
-                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-                background-color: #333;
-                color: #fff;
-                border-radius: 5px;
-            }
-
-            canvas {
-                border: 1px solid white;
-            }
-        </style>
     </head>
     <body onload="start();">
         <div id="wrap">
@@ -95,17 +69,37 @@ var brain = new deepqlearn.Brain(num_inputs, num_actions, opt); // woohoo
 <h1>State Visualizations</h1>
 <div>
     <b>Left</b>
-    : Current input state (quite a useless thing to look at). <b>Right</b>
-    : Average reward over time (this should go up as agent becomes better on average at collecting rewards)
+    : Current input state. <b>Right</b>
+    : Average reward over time (should go up as agent becomes better on average)
 </div>
 <canvas id="vis_canvas" width="350" height="150"></canvas>
 <canvas id="graph_canvas" width="350" height="150"></canvas>
 <br/>
 <canvas id="net_canvas" width="700" height="200"></canvas>
 <br/>
-<div style="font-size:13px;">(Takes ~10 minutes to train with current settings. If you're impatient, scroll down and load an example pre-trained network from pre-filled JSON)
-   </div>
+
+<!-- Actual Game -->
+
+<div id="ui-container">
+    <div id="scoreboard">
+      <span style="color: #bc232c;">Red score: <span id="red-score">0</span></span>
+      <span style="color: #286fb5;">Blue score: <span id="blue-score">0</span></span>
+    </div>
+    <div id="timer" style="color:#fff; font-size:1.3em; margin-bottom:8px;">2:00</div>
+    <div>
+      <button id="start-btn" style="font-size:1em; padding:6px 18px;">Start Game</button>
+      <button id="reset-btn" style="font-size:1em; padding:6px 18px; margin-left:8px;">Reset</button>
+    </div>
+  </div>
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+  </div>
+  <canvas id="background-canvas"></canvas>
+  <img id="ladder" src="ladder.png"/>
+
 <canvas id="canvas" width="700" height="500"></canvas>
+
+
 <div id="brain_info_div"></div>
 <h1>Controls</h1>
 <button onclick="goveryfast()">Go very fast</button>
