@@ -659,8 +659,9 @@ var w;
 // global world object
 var current_interval_id;
 var skipdraw = false;
+
 function start() {
-    canvas = document.getElementById("canvas");
+    canvas = document.getElementById("game-canvas");
     ctx = canvas.getContext("2d");
 
     w = new World();
